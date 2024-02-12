@@ -1,8 +1,12 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+
 const App = () => {
   return(
-    <div>
-      <h1>Virtu-Lib</h1>
-    </div>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
   )
 }
 

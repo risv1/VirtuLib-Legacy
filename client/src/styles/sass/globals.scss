@@ -2,11 +2,14 @@
 
 $hue1: #0F0F0F;
 $hue2: #232D3F;
-$hue3: #005B41;
-$hue4: #008170;
+$hue3: #027e4f;
+$hue4: #00d0b5;
 
 body{
-  background-color: white;
+  background-color: $hue1;
   color: black;
   font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
 }

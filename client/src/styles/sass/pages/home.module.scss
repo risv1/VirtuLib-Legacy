@@ -1,0 +1,35 @@
+$hue1: #0F0F0F;
+$hue2: #232D3F;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+      color: $hue4;
+
+      .title {
+        font-size: 2.5rem;
+        justify-self: center;
+        align-self: center;
+        color: $hue3;
+        margin-bottom: 3rem;
+      }
+  
+    }
+  }
+  

@@ -1,0 +1,46 @@
+$hue1: #0F0F0F;
+$hue2: #232D3F;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav{
+    width: 100%;
+    height: 15vh;
+    @include flex;
+    justify-content: space-between;
+    
+    .head{
+        @include flex;
+        flex-direction: row;
+        color: $hue3;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 1.5rem;
+
+        p{
+            margin-left: 1rem;
+        }
+    }
+
+    .navs{
+        @include flex;
+        justify-content: space-around;
+        padding-right: 1.5rem;
+        gap: 1.5rem;
+
+        .navItem{
+            font-size: 1.4rem;
+            text-decoration: none;
+            color: $hue4;
+            font-weight: 700;
+        }
+
+    }
+}
