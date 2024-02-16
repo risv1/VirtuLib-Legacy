@@ -9,6 +9,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.set("view engine", "ejs");
+
 connection
   .then(() => {
     app.use(bookRoutes);

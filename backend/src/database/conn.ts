@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const connection = mongoose.connect("mongodb://root:example@localhost:27017/",{
+export const connection = mongoose.connect("mongodb://127.0.0.1:27017/vb",{
     serverSelectionTimeoutMS: 5000,
 }).then(()=>{
     console.log("Database connected");

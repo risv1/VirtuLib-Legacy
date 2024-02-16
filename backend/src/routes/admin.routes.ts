@@ -1,14 +1,16 @@
-import express from "express"
-import { fetchUsers } from "../handlers/admin" 
-import { createReservation, getAllReservations, getReservationById, getUserReservedBooks } from "../handlers/reservations"
+import express from "express";
+import { createBook, fetchUsers } from "../handlers/admin";
+import {
+  getAllReservations,
+  getReservationById,
+} from "../handlers/reservations";
 
-const adminRouter = express.Router()
+const adminRouter = express.Router();
 
-adminRouter.get("/admin/users", fetchUsers) 
-adminRouter.get("/admin/reservations", getAllReservations) 
-adminRouter.get("/admin/reservation/:id", getReservationById)
-adminRouter.get("/admin/reservations/:userId", getUserReservedBooks)
+adminRouter.get("/admin/users", fetchUsers);
+adminRouter.get("/admin/reservations", getAllReservations);
+adminRouter.get("/admin/reservation/:id", getReservationById);
 
-adminRouter.post("/admin/reservations", createReservation)
+adminRouter.post("/admin/books", createBook);
 
 export default adminRouter;
