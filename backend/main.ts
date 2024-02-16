@@ -9,10 +9,15 @@ const app = express();
 
 app.use(bodyParser.json());
 
+// ejs views
+app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 connection
   .then(() => {
+    app.get("/", (req, res) => {
+      res.render("index.ejs", { title: "Library" });
+    });
     app.use(bookRoutes);
     app.use(adminRoutes);
     app.use(userRoutes);

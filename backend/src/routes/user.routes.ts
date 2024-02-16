@@ -1,11 +1,19 @@
-import express from "express"
-import { fetchUser } from "../handlers/users" 
-import { createReservation, getUserReservedBooks } from "../handlers/reservations";
+import express, { Request, Response } from "express"
+import { createReservation} from "../handlers/reservations";
+import { logOut, loginUser, registerUser } from "../handlers/auth";
 
 const userRouter = express.Router()
 
-userRouter.get("/users/:id", fetchUser) 
 userRouter.post("/reservations", createReservation);
-userRouter.get("/reservations/:userId", getUserReservedBooks);
+userRouter.post("/register", registerUser)
+userRouter.post("/login", loginUser)
+userRouter.post("/logout", logOut)
+
+userRouter.get("/login", (req: Request, res: Response) => {
+    res.render("login.ejs");
+})
+userRouter.get("/register", (req: Request, res: Response) => {
+    res.render("register.ejs");
+})
 
 export default userRouter;
