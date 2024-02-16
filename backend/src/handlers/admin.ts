@@ -1,16 +1,44 @@
 import { Request, Response } from "express";
-import { User } from "../models/users";
+import { User, UserModel } from "../models/users";
 import { Book, BookModel } from "../models/books";
 import { ReservationModel } from "../models/reservations";
 
-export const fetchUsers = (req: Request, res: Response) => {
-  const data = users;
-  if (!data) {
-    throw new Error("No users found");
-  }
+export const fetchUsers = async(req: Request, res: Response) => {
+  const data = await UserModel.find();
+    if(!data){
+        throw new Error("No users found");
+    }
 
-  return res.status(200).json(data);
+    return res.status(200).json(data);
 };
+
+export const fetchUser = async(req: Request, res: Response) => {
+  const id = req.params.id
+  try {
+      const data = await UserModel.findOne({ id: id });
+      if(!data){
+          return res.status(404).json({ error: "No user found" });
+      }
+      return res.status(200).json(data);
+  } catch (error) {
+      return res.status(500).json({ error: error });
+  }
+}
+
+
+export const getUserReservedBooks = async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+
+  try {
+      const userReservations = await ReservationModel.find({ userId: userId });
+      if (userReservations.length === 0) {
+          return res.status(404).json({ error: "No reservations found for this user" });
+      }
+      return res.status(200).json(userReservations);
+  } catch (error) {
+      return res.status(500).json({ error: error });
+  }
+}
 
 export const createBook = async (req: Request, res: Response) => {
   try {
@@ -36,41 +64,3 @@ export const createBook = async (req: Request, res: Response) => {
     return res.status(500).json({ error: "Failed to create book" });
   }
 };
-
-const users: User[] = [
-  {
-    id: "1",
-    name: "User1",
-    email: "user1@example.com",
-    password: "123",
-    role: "admin",
-  },
-  {
-    id: "2",
-    name: "User2",
-    email: "user2@example.com",
-    password: "456",
-    role: "user",
-  },
-  {
-    id: "3",
-    name: "User3",
-    email: "user3@example.com",
-    password: "789",
-    role: "user",
-  },
-  {
-    id: "4",
-    name: "User4",
-    email: "user4@example.com",
-    password: "012",
-    role: "admin",
-  },
-  {
-    id: "5",
-    name: "User5",
-    email: "user5@example.com",
-    password: "345",
-    role: "user",
-  },
-];
