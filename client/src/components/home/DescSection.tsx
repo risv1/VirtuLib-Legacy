@@ -1,4 +1,4 @@
-import styles from "../styles/components/desc-section.module.css";
+import styles from "../../styles/components/desc-section.module.css";
 
 const DescSection = (props: {desc: string, src: string}) => {
     return(

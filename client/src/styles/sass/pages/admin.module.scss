@@ -1,0 +1,16 @@
+$hue1: #0F0F0F;
+$hue2: #232D3F;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    @include flex;
+}

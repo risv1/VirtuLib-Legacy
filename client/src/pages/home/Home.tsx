@@ -1,5 +1,5 @@
-import DescSection from "../components/DescSection";
-import styles from "../styles/pages/home.module.css";
+import DescSection from "../../components/home/DescSection";
+import styles from "../../styles/pages/home.module.css";
 
 const Home = () => {
   const content = [

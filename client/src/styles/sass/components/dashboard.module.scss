@@ -1,0 +1,91 @@
+$hue1: #0f0f0f;
+$hue2: #232d3f;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 100%;
+  border: $hue4 solid 3px;
+  background-color: $hue2;
+  display: flex;
+  flex-direction: row;
+  border-radius: 15px;
+
+  h1 {
+    color: $hue4;
+    padding-top: 1rem;
+  }
+
+  .linkContainer {
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    border-right: $hue4 solid 3px;
+    @include flex;
+
+    h1 {
+      color: $hue4;
+      padding-top: 1rem;
+    }
+
+    .links {
+      @include flex;
+      margin-top: 1rem;
+      flex-direction: column;
+      width: fit-content;
+      height: fit-content;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      .link {
+        @include flex;
+        padding: 20%;
+        flex-direction: column;
+        color: $hue4;
+        width: 150%;
+        height: 100%;
+        border: $hue4 solid 3px;
+        background-color: $hue1;
+        border-radius: 15px;
+        transition: all 0.15s ease-in-out;
+        box-shadow: $hue4 0px 0px 10px 0px;
+
+        &:hover{
+            background-color: $hue2;
+        }
+      }
+    }
+  }
+
+  .outletContainer{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 80%;
+    height: 100%;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+
+    .linkContainer {
+      width: 100%;
+      border-right: none;
+    }
+
+    .outletContainer {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
+

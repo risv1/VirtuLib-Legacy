@@ -1,0 +1,14 @@
+$hue1: #0f0f0f;
+$hue2: #232d3f;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container{
+    
+}
