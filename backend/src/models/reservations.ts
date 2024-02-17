@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 export type Reservation = {
     id: string;
-    bookId: string;
-    userId: string;
+    bookid: string;
+    userid: string;
     status: "reserved" | "active" | "returned";
-    reservedAt: string;
+    reserved_at: string;
 }
 
 const ReservationSchema = new mongoose.Schema<Reservation>({
@@ -13,11 +13,11 @@ const ReservationSchema = new mongoose.Schema<Reservation>({
         type: String,
         required: true,
     },
-    bookId: {
+    bookid: {
         type: String,
         required: true,
     },
-    userId: {
+    userid: {
         type: String,
         required: true,
     },
@@ -25,7 +25,7 @@ const ReservationSchema = new mongoose.Schema<Reservation>({
         type: String,
         required: true,
     },
-    reservedAt: {
+    reserved_at: {
         type: String,
         required: true,
     },

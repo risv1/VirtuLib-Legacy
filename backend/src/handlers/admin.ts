@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { User, UserModel } from "../models/users";
+import { UserModel } from "../models/users";
 import { Book, BookModel } from "../models/books";
-import { ReservationModel } from "../models/reservations";
 
 export const fetchUsers = async(req: Request, res: Response) => {
   const data = await UserModel.find();
@@ -25,20 +24,6 @@ export const fetchUser = async(req: Request, res: Response) => {
   }
 }
 
-
-export const getUserReservedBooks = async (req: Request, res: Response) => {
-  const userId = req.params.userId;
-
-  try {
-      const userReservations = await ReservationModel.find({ userId: userId });
-      if (userReservations.length === 0) {
-          return res.status(404).json({ error: "No reservations found for this user" });
-      }
-      return res.status(200).json(userReservations);
-  } catch (error) {
-      return res.status(500).json({ error: error });
-  }
-}
 
 export const createBook = async (req: Request, res: Response) => {
   try {

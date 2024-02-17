@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from 'dotenv';
 
-export const connection = mongoose.connect("mongodb://127.0.0.1:27017/vb",{
+dotenv.config();
+const dbUri = process.env.DB_URI!;
+
+export const connection = mongoose.connect(dbUri,{
     serverSelectionTimeoutMS: 5000,
 }).then(()=>{
     console.log("Database connected");

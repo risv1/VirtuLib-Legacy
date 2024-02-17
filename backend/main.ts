@@ -4,10 +4,12 @@ import bookRoutes from "./src/routes/book.routes";
 import adminRoutes from "./src/routes/admin.routes";
 import userRoutes from "./src/routes/user.routes";
 import { connection } from "./src/database/conn";
+import { corsMiddleware } from "./src/middlewares/cors";
 
 const app = express();
 
 app.use(bodyParser.json());
+corsMiddleware(app)
 
 // ejs views
 app.use(express.urlencoded({ extended: true }));

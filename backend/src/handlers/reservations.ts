@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { Reservation, ReservationModel } from "../models/reservations";
 
 export const createReservation = async(req: Request, res: Response) => {
-    const { userId, bookId } = req.body;
+    const { userid, bookid } = req.body;
     const reservation: Reservation = {
         id: Math.random().toString(36).substring(2, 2 + 10),
-        userId: userId,
-        bookId: bookId,
+        userid: userid,
+        bookid: bookid,
         status: 'reserved',
-        reservedAt: new Date().toISOString().split('T')[0]
+        reserved_at: new Date().toISOString()
     };
     if(!reservation){
         throw new Error("Reservation failed");
