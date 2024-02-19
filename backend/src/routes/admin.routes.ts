@@ -5,8 +5,11 @@ import {
   getReservationById,
 } from "../handlers/reservations";
 import { getUserReservedBooks } from "../handlers/users";
+import { checkUserRole } from "../handlers/auth";
 
 const adminRouter = express.Router();
+
+adminRouter.use("/admin", checkUserRole)
 
 adminRouter.get("/admin/users", fetchUsers);
 adminRouter.get("/admin/users/:id", fetchUser); 

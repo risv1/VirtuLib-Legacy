@@ -4,11 +4,16 @@ import bookRoutes from "./src/routes/book.routes";
 import adminRoutes from "./src/routes/admin.routes";
 import userRoutes from "./src/routes/user.routes";
 import { connection } from "./src/database/conn";
+import cookieParser from "cookie-parser";
 import { corsMiddleware } from "./src/middlewares/cors";
+import { sessionMiddleware } from "./src/middlewares/session";
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+sessionMiddleware(app)
 corsMiddleware(app)
 
 // ejs views

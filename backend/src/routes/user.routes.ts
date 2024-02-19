@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express"
 import { createReservation} from "../handlers/reservations";
 import { logOut, loginUser, registerUser } from "../handlers/auth";
-import { getUserReservedBooks } from "../handlers/users";
+import { getSession, getUserReservedBooks } from "../handlers/users";
 
 const userRouter = express.Router()
 
@@ -10,6 +10,7 @@ userRouter.post("/register", registerUser)
 userRouter.post("/login", loginUser)
 userRouter.post("/logout", logOut)
 
+userRouter.get("/user", getSession)
 userRouter.get("/reservations", getUserReservedBooks)
 userRouter.get("/login", (req: Request, res: Response) => {
     res.render("login.ejs");

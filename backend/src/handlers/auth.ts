@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload, verify } from "jsonwebtoken";
 import { UserModel } from "../models/users";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 const secret: string = process.env.JWT_SECRET!;
 
 export const registerUser = async (req: Request, res: Response) => {
-    try {  
-      const hashPass = await bcrypt.hash(req.body.password, 10);
+  try {
+    const hashPass = await bcrypt.hash(req.body.password, 10);
     const user = {
       id: Math.random()
         .toString(36)
@@ -35,31 +35,62 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 export const loginUser = async (req: Request, res: Response) => {
-    try {
-      const { email, password } = req.body;
-      const user = await UserModel.findOne({ email: email });
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      const isPasswordMatch = await bcrypt.compare(password, user.password);
-      if (!isPasswordMatch) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-  
-      const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, secret, {
-        expiresIn: "24h", 
-      });
-      res.cookie("token", token, { httpOnly: true });
-
-      res.redirect("/");
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ message: "Internal server error" });
+  try {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-  };
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (!isPasswordMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { id: user.id, email: user.email, role: user.role },
+      secret,
+      {
+        expiresIn: "24h",
+      }
+    );
+    res.cookie("token", token, { httpOnly: true });
+    res
+      .status(200)
+      .json({
+        message: "Logged in",
+        user: { id: user.id, name: user.name, email: user.email, role: user.role },
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
 
 export const logOut = (req: Request, res: Response) => {
-    res.clearCookie("token");
-    res.redirect("/");
-}
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logged out" });
+};
+
+export const checkUserRole = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized: Missing token" });
+  }
+
+  try {
+    const decoded: string | JwtPayload = verify(token, secret);
+    const userRole = (decoded as JwtPayload).role;
+    if (userRole !== "admin") {
+      return res.status(403).json({ message: "Forbidden: Access denied" });
+    }
+    next();
+  } catch (err) {
+    console.error(err);
+    return res.status(401).json({ message: "Unauthorized: Invalid token" });
+  }
+};
