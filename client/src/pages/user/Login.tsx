@@ -29,7 +29,6 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user));
         updateSession(data.user);
         navigate("/profile");
       } else {

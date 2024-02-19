@@ -9,6 +9,12 @@ const secret: string = process.env.JWT_SECRET!;
 
 export const registerUser = async (req: Request, res: Response) => {
   try {
+
+    const existingUser = await UserModel.findOne({ email: req.body.email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User with this email already exists" });
+    }
+
     const hashPass = await bcrypt.hash(req.body.password, 10);
     const user = {
       id: Math.random()
@@ -28,9 +34,10 @@ export const registerUser = async (req: Request, res: Response) => {
       .catch((err) => {
         console.log(err);
       });
-    res.redirect("/login");
-  } catch (err) {
+    res.status(200).json({ message: "User created" });
+  } catch (err: any) {
     console.log(err);
+    throw new Error(err);
   }
 };
 
@@ -48,7 +55,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      { id: user.id,name: user.name, email: user.email, role: user.role },
       secret,
       {
         expiresIn: "24h",

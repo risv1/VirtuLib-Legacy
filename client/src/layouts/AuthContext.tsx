@@ -1,3 +1,5 @@
+// AuthProvider component
+
 import { createContext, useContext, useEffect, useState } from "react";
 import { User } from "../models/users";
 
@@ -12,18 +14,10 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider = (props: { children: JSX.Element }) => {
-  const [session, setSession] = useState<User | null>(() => {
-    const storedSession = localStorage.getItem("user");
-    return storedSession ? JSON.parse(storedSession) : null;
-  });
+  const [session, setSession] = useState<User | null>(null);
 
   const updateSession = (session: User | null) => {
     setSession(session);
-    if (session) {
-      localStorage.setItem("user", JSON.stringify(session));
-    } else {
-      localStorage.removeItem("user");
-    }
   };
 
   useEffect(() => {
@@ -42,15 +36,13 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
           updateSession(data);
         } else {
           console.log("No session found");
-          localStorage.removeItem("session");
+          updateSession(null);
         }
       } catch (error) {
         console.error("Error:", error);
       }
     };
-    if (session) {
-      getSession();
-    }
+    getSession();
   }, []);
 
   return (
