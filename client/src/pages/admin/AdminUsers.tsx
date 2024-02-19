@@ -10,6 +10,7 @@ const AdminUsers = () => {
         try{
             const response = await fetch("http://localhost:8000/admin/users", {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 }

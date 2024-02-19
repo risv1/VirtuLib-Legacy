@@ -10,7 +10,7 @@ const DetailsTable = (props: {
 
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-  const currentEntries = props.entries.slice(
+  const currentEntries = (props.entries).slice(
     indexOfFirstEntry,
     indexOfLastEntry
   );

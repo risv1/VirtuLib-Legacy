@@ -10,6 +10,7 @@ const AdminReservations = () => {
         try{
             const response = await fetch("http://localhost:8000/admin/reservations", {
                 method: "GET",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 }
