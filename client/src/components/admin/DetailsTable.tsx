@@ -1,22 +1,23 @@
 import { useState } from "react";
 import styles from "../../styles/components/table.module.css";
 
-const DetailsTable = (props: {
-  columns: Array<string>;
-  entries: any;
-}) => {
+const DetailsTable = (props: { columns: Array<string>; entries: any }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage] = useState(10);
 
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
-  const currentEntries = (props.entries).slice(
+  const currentEntries = props.entries.slice(
     indexOfFirstEntry,
     indexOfLastEntry
   );
 
   const renderTableHeader = () => {
-    return props.columns.map((column, index) => <th key={index}>{column}</th>);
+    return props.columns.map((column, index) => (
+      <th className={styles.column} key={index}>
+        {column}
+      </th>
+    ));
   };
 
   const renderTableData = () => {
@@ -24,7 +25,9 @@ const DetailsTable = (props: {
       return (
         <tr key={index}>
           {props.columns.map((column, index) => (
-            <td key={index}>{entry[column.toLowerCase()]}</td>
+            <td className={styles.column} key={index}>
+              {entry[column.toLowerCase()]}
+            </td>
           ))}
         </tr>
       );
@@ -41,13 +44,13 @@ const DetailsTable = (props: {
 
   return (
     <div className={styles.container}>
-      <table>
+      <table className={styles.table}>
         <thead>
           <tr>{renderTableHeader()}</tr>
         </thead>
         <tbody>{renderTableData()}</tbody>
       </table>
-      <div>
+      <div className={styles.button_container}>
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous
         </button>

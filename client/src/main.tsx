@@ -12,6 +12,9 @@ import Login from "./pages/user/Login.tsx";
 import Register from "./pages/user/Register.tsx";
 import Profile from "./pages/user/Profile.tsx";
 import { AuthProvider } from "./layouts/AuthContext.tsx";
+import BaseDash from "./components/admin/BaseDash.tsx";
+import Books from "./pages/view/Books.tsx";
+import BookByID from "./pages/view/BookByID.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +23,18 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/about",
-        element: <h1>About</h1>,
+        path: "/books",
+        element: <Books />
+      },
+      {
+        path: "/books/:id",
+        element: <BookByID />
       },
       {
         path: "/admin",
         element: <Admin />,
         children: [
+          {index: true, element: <BaseDash />},
           {
             path: "users",
             element: <AdminUsers />,

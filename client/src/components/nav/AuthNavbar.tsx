@@ -13,8 +13,8 @@ const Navbar = (props: {isAdmin: boolean}) => {
         <Link className={styles.navItem} to="/">
           Home
         </Link>
-        <Link className={styles.navItem} to="/about">
-          About
+        <Link className={styles.navItem} to="/books">
+          Books
         </Link>
         {props.isAdmin && (
           <Link to="/admin" className={styles.navItem}>

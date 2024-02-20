@@ -10,5 +10,54 @@ $hue4: #00d0b5;
 }
 
 .container{
-    
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+  @include flex;
+  flex-direction: column;
+
+  .table{
+    scroll-behavior: smooth;
+    overflow: scroll;
+    border: $hue4 solid 3px;
+    border-radius: 15px;
+    box-shadow: $hue4 0px 0px 10px 0px;
+    width: 80%;
+    height: 80vh;
+
+    .column{
+      border-right: $hue4 solid 3px;
+      color: white;
+
+      &:last-child{
+        border-right: none;
+      }
+    }
+  }
+
+  .button_container{
+    @include flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+
+    button{
+      @include flex;
+      font-size: 1rem;
+      width: 45%;
+      height: 15%;
+      padding: 0.6rem;
+      border: $hue4 2px solid;
+      font-weight: 1rem;
+      background-color: $hue1;
+      transition: 0.15s ease-in-out;
+      color: $hue4;
+      border-radius: 10px;
+
+      &:hover{
+        background-color: $hue2;
+        box-shadow: $hue4 0px 0px 10px 0px;
+      }
+    }
+  }
 }

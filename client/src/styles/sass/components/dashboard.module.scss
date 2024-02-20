@@ -30,7 +30,6 @@ $hue4: #00d0b5;
     flex-direction: column;
     width: 25%;
     height: 100%;
-    border-right: $hue4 solid 3px;
     @include flex;
 
     h1 {
@@ -52,7 +51,7 @@ $hue4: #00d0b5;
         padding: 20%;
         flex-direction: column;
         color: $hue4;
-        width: 150%;
+        width: 100%;
         height: 100%;
         border: $hue4 solid 3px;
         background-color: $hue1;
@@ -68,11 +67,33 @@ $hue4: #00d0b5;
   }
 
   .outletContainer{
+    border-left: $hue4 solid 3px;
     padding-left: 2rem;
     padding-right: 2rem;
     width: 80%;
     height: 100%;
   }
+
+  .base_container{
+    @include flex;
+    height: 100vh;
+
+    div{
+      @include flex;
+      flex-direction: column;
+      height: 66%;
+      padding: 1rem;
+      border-radius: 15px;
+      border: $hue4 solid 3px;
+      box-shadow: $hue4 0px 0px 10px 0px;
+      p{
+        color: white;
+        font-size: 1.5rem;
+      }
+
+    }
+  }
+
   @media screen and (max-width: 768px) {
     flex-direction: column;
     height: auto;

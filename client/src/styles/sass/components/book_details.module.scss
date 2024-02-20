@@ -1,0 +1,87 @@
+$hue1: #0F0F0F;
+$hue2: #232D3F;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    @include flex;
+    color: white;
+}
+
+.books_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    color: $hue4;
+    gap: 3rem;
+
+    .book{
+        @include flex;
+        background-color: $hue2;
+        align-items: start;
+        border: $hue4 solid 3px;
+        box-shadow: $hue4 0px 0px 10px 0px;
+        width: 90%;
+        height: 100%;
+        flex-direction: column;
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        
+        img{
+            align-self: center;
+        }
+
+        .detail{
+            color: $hue4;
+            font-weight: bold;
+        }
+        .button{
+            @include flex;
+            flex-direction: row;
+            font-size: 1.2rem;
+            margin-left: auto;
+            gap: 1rem;
+            width: 30%;
+            height: 10%;
+            color: $hue4;
+            border-radius: 10px;
+            background-color: $hue1;
+            transition: 0.15s ease-in-out;
+            border: $hue4 solid 3px;
+
+            &:hover{
+                background-color: $hue2;
+                box-shadow: $hue4 0px 0px 10px 0px;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+}
+.search{
+    font-size: 1rem;
+    background-color: $hue1;
+    padding: 1.2rem;
+    border-radius: 10px;
+    color: $hue4;
+    border: $hue4 solid 4px;
+    
+    &::placeholder{
+        color: $hue4;
+    }
+
+    &:focus{
+        outline: none;
+    }
+}
