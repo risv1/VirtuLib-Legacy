@@ -1,12 +1,15 @@
 import Dashboard from "../../components/admin/Dashboard";
-import styles from "../../styles/pages/admin.module.css"
+import { ModalProvider } from "../../layouts/ModalContext";
+import styles from "../../styles/pages/admin.module.css";
 
 const Admin = () => {
-    return(
-        <div className={styles.container}>
-            <Dashboard />
+  return (
+    <ModalProvider>
+      <div className={styles.container}>
+        <Dashboard />
       </div>
-    )
-}
+    </ModalProvider>
+  );
+};
 
 export default Admin;

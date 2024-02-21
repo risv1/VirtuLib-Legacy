@@ -15,6 +15,7 @@ import { AuthProvider } from "./layouts/AuthContext.tsx";
 import BaseDash from "./components/admin/BaseDash.tsx";
 import Books from "./pages/view/Books.tsx";
 import BookByID from "./pages/view/BookByID.tsx";
+import AdminNewBook from "./pages/admin/AdminNewBook.tsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,9 @@ const router = createBrowserRouter([
           {
             path: "books",
             element: <AdminBooks />,
+            children: [
+              {path: "new", element: <AdminNewBook />},
+            ]
           },
         ],
       },

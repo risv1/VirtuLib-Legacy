@@ -42,7 +42,7 @@ const BookContainer = () => {
 
   return (
     <>
-      <div>
+      <div style={{marginLeft: "auto", marginRight: "1rem"}}>
         <input
           type="text"
           placeholder="Search by title..."
@@ -52,7 +52,7 @@ const BookContainer = () => {
         />
       </div>
       <div className={styles.books_container}>
-        {filteredBooks.map((book) => (
+        {filteredBooks.length>0 ? (filteredBooks.map((book) => (
           <ViewBook
             key={book.id}
             id={book.id}
@@ -61,7 +61,11 @@ const BookContainer = () => {
             genre={book.genre}
             published={book.published}
           />
-        ))}
+        ))):(
+          <div style={{justifySelf: "center"}}>
+            <h1>No books found...</h1>
+          </div>
+        )}
       </div>
     </>
   );
