@@ -1,0 +1,76 @@
+// Define variables for colors
+$hue1: #0f0f0f;
+$hue2: #232d3f;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  @include flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2rem;
+    width: 100%;
+    height: 100%;
+
+    label {
+      color: $hue4;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      margin-right: 1rem;
+    }
+
+    input,
+    textarea {
+      background-color: $hue2;
+      padding: 1rem;
+      border: none;
+      color: $hue4;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90%;
+    }
+
+    button[type="submit"] {
+      justify-self: center;
+      grid-column: span 4;
+      background-color: $hue2;
+      border: $hue4 solid 2px;
+      transition: 0.15s ease-in-out;
+      padding: 1rem;
+      width: 66%;
+      color: $hue4;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 10px;
+
+      &:hover {
+        box-shadow: $hue4 0px 0px 10px 0px;
+      }
+    }
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr); 
+      }
+  
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+  }
+}

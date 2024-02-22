@@ -27,12 +27,14 @@ export const fetchUser = async(req: Request, res: Response) => {
 
 export const createBook = async (req: Request, res: Response) => {
   try {
-    const { title, author, genre, published } = req.body;
+    const { src, title, author, genre, description, published } = req.body;
     const book: Book = {
       id: Math.random().toString(36).substring(2, 2 + 10),
+      src: src,
       title: title,
       author: author,
       genre: genre,
+      description: description,
       published: published,
       reserved: "returned",
     };

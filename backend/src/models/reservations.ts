@@ -4,7 +4,6 @@ export type Reservation = {
     id: string;
     bookid: string;
     userid: string;
-    status: "reserved" | "active" | "returned";
     reserved_at: string;
 }
 
@@ -18,10 +17,6 @@ const ReservationSchema = new mongoose.Schema<Reservation>({
         required: true,
     },
     userid: {
-        type: String,
-        required: true,
-    },
-    status: {
         type: String,
         required: true,
     },

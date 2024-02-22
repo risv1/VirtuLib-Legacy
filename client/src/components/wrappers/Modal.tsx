@@ -2,25 +2,29 @@ import { ReactNode } from "react";
 import styles from "../../styles/components/modal.module.css";
 import { X } from "lucide-react";
 import { useModal } from "../../layouts/ModalContext";
+import { useNavigate } from "react-router";
 
 const Modal = (props: {
   open: boolean;
-  onClose: () => void;
   children: ReactNode;
 }) => {
+  const { onClose } = useModal();
+  const navigate = useNavigate();
 
-    const {onClose} = useModal();
+  const handleClose = () => {
+    onClose();
+    navigate("..");
+  };
 
-    const handleContent = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation();
-        onClose()
-    }
-    
+  const handleContent = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     props.open && (
-      <div className={styles.modal} onClick={props.onClose}>
+      <div className={styles.modal} onClick={handleClose}>
         <div className={styles.modal_content} onClick={handleContent}>
-          <div onClick={props.onClose} className={styles.close}>
+          <div className={styles.close} onClick={handleClose}>
             <X />
           </div>
           {props.children}

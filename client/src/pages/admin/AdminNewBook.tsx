@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import Modal from '../../components/wrappers/Modal';
 import { useModal } from '../../layouts/ModalContext';
+import styles from "../../styles/components/post.module.css"
 
 const AdminNewBook = () => {
     const [formData, setFormData] = useState({
-        id: '',
         src: '',
         title: '',
         author: '', 
         description: '',
         genre: '',
         published: '',
-        reserved: '',
     });
 
-    const {open, onClose } = useModal();
+    const {open} = useModal();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -22,6 +21,7 @@ const AdminNewBook = () => {
         try {
             const response = await fetch('http://localhost:8000/admin/books', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -53,19 +53,10 @@ const AdminNewBook = () => {
     }
 
     return (
-        <Modal onClose={onClose} open={open}>
-            <div>
+        <Modal open={open}>
+            <div className={styles.container}>
                 <h1>Add New Book</h1>
                 <form onSubmit={handleSubmit}>
-                    <label>
-                        ID:
-                        <input
-                            type="text"
-                            name="id"
-                            value={formData.id}
-                            onChange={handleChange}
-                        />
-                    </label>
                     <label>
                         Image Source:
                         <input
@@ -116,15 +107,6 @@ const AdminNewBook = () => {
                             type="text"
                             name="published"
                             value={formData.published}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label>
-                        Reserved:
-                        <input
-                            type="text"
-                            name="reserved"
-                            value={formData.reserved}
                             onChange={handleChange}
                         />
                     </label>

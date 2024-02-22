@@ -1,3 +1,14 @@
+$hue1: #0F0F0F;
+$hue2: #232D3F;
+$hue3: #027e4f;
+$hue4: #00d0b5;
+
+@mixin flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -11,12 +22,15 @@
 }
 
 .modal_content {
-  background-color: white;
+  border: $hue4 solid 3px;
+  background-color: $hue1;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   max-width: 80%; 
   max-height: 80%; 
+  width: 90%;
+  height: 90%;
   overflow: auto;
 }
 
