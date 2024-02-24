@@ -7,7 +7,10 @@ export const createReservation = async(req: Request, res: Response) => {
         id: Math.random().toString(36).substring(2, 2 + 10),
         userid: userid,
         bookid: bookid,
-        reserved_at: new Date().toISOString()
+        reserved_at: new Date().toISOString(),
+        // due: new Date(Date.now() + 20000).toISOString(),
+        due: new Date(Date.now() + 12096e5).toISOString(),
+        past_due: 0
     };
     if(!reservation){
         throw new Error("Reservation failed");

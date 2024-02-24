@@ -1,5 +1,5 @@
 import express from "express";
-import { createBook, fetchUser, fetchUsers } from "../handlers/admin";
+import { createBook, fetchUser, fetchUsers, setActiveBook, setReturnedBook } from "../handlers/admin";
 import {
   getAllReservations,
   getReservationById,
@@ -18,5 +18,8 @@ adminRouter.get("/admin/reservations", getAllReservations);
 adminRouter.get("/admin/reservation/:id", getReservationById);
 
 adminRouter.post("/admin/books", createBook);
+
+adminRouter.put("/admin/books/returned/:id", setReturnedBook)
+adminRouter.put("/admin/books/active/:id", setActiveBook)
 
 export default adminRouter;

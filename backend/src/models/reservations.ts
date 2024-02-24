@@ -5,6 +5,8 @@ export type Reservation = {
     bookid: string;
     userid: string;
     reserved_at: string;
+    due: string;
+    past_due: number;
 }
 
 const ReservationSchema = new mongoose.Schema<Reservation>({
@@ -24,6 +26,14 @@ const ReservationSchema = new mongoose.Schema<Reservation>({
         type: String,
         required: true,
     },
+    due: {
+        type: String,
+        required: true,
+    },
+    past_due: {
+        type: Number,
+        required: true,
+    }
 })
 
 export const ReservationModel = mongoose.model<Reservation>("Reservation", ReservationSchema);

@@ -8,7 +8,7 @@ export type Book = {
     description: string;
     genre: string;
     published: string;
-    reserved: "reserved" | "active" | "returned";
+    reserved: "active" | "returned";
 }
 
 const BookSchema = new mongoose.Schema<Book>({

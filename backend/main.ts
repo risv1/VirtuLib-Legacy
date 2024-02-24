@@ -6,19 +6,23 @@ import userRoutes from "./src/routes/user.routes";
 import { connection } from "./src/database/conn";
 import cookieParser from "cookie-parser";
 import { corsMiddleware } from "./src/middlewares/cors";
-import { sessionMiddleware } from "./src/middlewares/session";
+import { checkDueReservations } from "./src/scripts/check-reservations";
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-sessionMiddleware(app)
 corsMiddleware(app)
 
 // ejs views
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+
+// check reservations
+//const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000;
+const CHECK_INTERVAL_MS = 2000;
+setInterval(checkDueReservations, CHECK_INTERVAL_MS);
 
 connection
   .then(() => {
