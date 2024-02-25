@@ -3,6 +3,7 @@ import DetailsTable from "../../components/admin/DetailsTable";
 import { Book } from "../../models/books";
 import { Outlet, useNavigate } from "react-router";
 import { useModal } from "../../layouts/ModalContext";
+import styles from "../../styles/pages/admin.module.css";
 
 const AdminBooks = () => {
   const columns = ["Id", "Title", "Author", "Genre", "Published", "Reserved"];
@@ -28,19 +29,23 @@ const AdminBooks = () => {
     fetchEntries();
   }, []);
 
-  const navigate = useNavigate()
-  const {onOpen} = useModal();
+  const navigate = useNavigate();
+  const { onOpen } = useModal();
 
   const handleRoute = () => {
     onOpen();
-    navigate('new')
-  }
+    navigate("new");
+  };
 
   return (
     <>
       <div>
-        <h1>Admin Books</h1> 
-        <button onClick={handleRoute}>Add New Book</button>
+        <div className={styles.head}>
+          <h1>Admin Books</h1>
+          <button className={styles.button} onClick={handleRoute}>
+            Add New Book
+          </button>
+        </div>
         <DetailsTable columns={columns} entries={entries} />
       </div>
       <Outlet />

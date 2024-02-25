@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Modal from '../../components/wrappers/Modal';
 import { useModal } from '../../layouts/ModalContext';
-import styles from "../../styles/components/post.module.css"
+import styles from "../../styles/components/post.module.css";
 
 const AdminNewBook = () => {
     const [formData, setFormData] = useState({
-        src: '',
+        src: '', 
         title: '',
         author: '', 
         description: '',
